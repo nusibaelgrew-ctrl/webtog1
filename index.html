@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>توق - التطبيق الرسمي</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      scroll-behavior: smooth;
+      color: #fff;
+      line-height: 1.5;
+      background: linear-gradient(
+        to bottom,
+        #3b291b 0%,
+        #C2B4AE 40%,
+        #3C2F25 70%,
+        #271C17 100%
+      );
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== NAVBAR ===== */
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      background: #3a2b1e;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .logo { order: 3; }
+    .logo img { height: 50px;
+   
+    }
+
+    .menu-icon {
+      order: 2;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* ===== MOBILE MENU FROM TOP ===== */
+    #mobileMenu {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      background: #fff;
+      border-radius: 0 0 12px 12px; /* حواف من الأسفل فقط */
+      width: 100%;
+      position: absolute;
+      top: 0;       /* يظهر من فوق */
+      left: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      z-index: 999;
+    }
+
+    #mobileMenu.show {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    #mobileMenu a {
+      padding: 15px 0;
+      color: #000;
+      font-size: 18px;
+    }
+     section {
+      background: rgba(39,28,23,0.2);
+      padding: 60px 30px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+        section.active { opacity: 1; transform: translateY(0); }
+ h1, h2, h3 {
+      color: #f5efe9;
+    }
+
+    p {
+      color: #e6d8c9;
+    }
+
+    .text-muted {
+      color: #e6d8c9 !important;
+    }
+
+    #stats {
+  background: linear-gradient(135deg, #514031, #3C2F25);
+}
+
+.stat-card {
+  background: #3a2b1e;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 25px rgba(230, 230, 230, 0.484);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card i {
+  font-size: 32px;
+  color: #f5efe9; /* لون أساسي */
+  margin-bottom: 12px;
+  display: block;
+}
+
+
+.stat-card h3 {
+  font-weight: 700;
+  color: #b8bcc1;
+}
+
+.stat-card p {
+  margin: 0;
+  color: #fefeff;
+  font-size: 14px;
+}
+
+    /* ===== SECTIONS ===== */
+    section {
+      background: rgba(39,28,23,0.2);
+      padding: 60px 30px;
+      min-height: 20vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    section.active { opacity: 1; transform: translateY(0); }
+
+    h2 {
+      margin: 0 auto;
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    p { font-size: 17px; max-width: 700px; margin-bottom: 15px; }
+
+    /* ===== HERO ===== */
+    .hero { padding-top: 100px; }
+    .hero h1 { font-size: 42px; margin-bottom: 15px; }
+    .hero p { font-size: 18px; margin-bottom: 30px; }
+    .phone-mockup {
+      width: 200px;
+      height: 400px;
+      background: url('img/1.png') no-repeat center/cover;
+      border-radius: 30px;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0); } }
+
+    /* ===== DOWNLOAD ===== */
+    .download-btn { background: #271C17; padding: 12px 25px; border-radius: 10px; font-weight: 600; }
+
+    /* ===== TOUR ===== */
+    .tour-images {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+    }
+    .tour-images img {
+      flex: 0 0 auto;
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: grab;
+      scroll-snap-align: start;
+    }
+    .tour-images img:hover { transform: scale(1.15); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+
+    /* ===== SOCIAL ICONS ===== */
+    .social-icons { display: flex; gap: 15px; margin-top: 10px; }
+    .social-icons img { width: 40px; height: 40px; cursor: pointer; transition: transform 0.3s, opacity 0.3s; }
+    .social-icons img:hover { transform: scale(1.2); opacity: 0.8; }
+
+    /* ===== FEATURES ===== */
+    #features { padding: 60px 30px; }
+    #features h2 { font-size: 32px; margin-bottom: 25px; direction: rtl; text-align: center; }
+    .features-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+    .feature-card {
+      background: rgba(96, 73, 63, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      width: 220px;
+      text-align: right;
+      direction: rtl;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .feature-card h3 { margin-bottom: 10px; font-size: 18px; text-align: center; }
+    .feature-card p { font-size: 15px; line-height: 1.5; text-align: center; }
+    .feature-card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 25px rgba(0,0,0,0.5); }
+
+    /* ===== ABOUT ===== */
+    #about { padding: 60px 30px; }
+    .about-box {
+      background: rgba(79, 58, 48, 0.6);
+      border-radius: 15px;
+      padding: 30px 20px;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .about-box:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+    #about h2 { font-size: 36px; margin-bottom: 25px; }
+    #about p { font-size: 18px; line-height: 1.7; direction: rtl; text-align: justify; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+  background: #1f1712;
+  padding: 40px 20px 20px;
+  direction: rtl;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  flex-wrap: wrap;
+}
+
+.footer-col h3 {
+  color: #b08d69;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-col a {
+  display: block;
+  color: #fff;
+  margin-bottom: 10px;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.footer-col a:hover {
+  color: #78603a;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social img {
+  width: 35px;
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.footer-social img:hover {
+  transform: scale(1.2);
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* موبايل */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+    /* ===== MEDIA QUERIES ===== */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 16px; }
+      .phone-mockup { width: 150px; height: 300px; }
+      .tour-images img { width: 150px; }
+      .features-container { flex-direction: column; align-items: center; gap: 15px; }
+      .feature-card { width: 90%; padding: 15px; }
+      .social-icons img { width: 35px; height: 35px; }
+      section { padding: 40px 20px; }
+      .about-box { padding: 20px 15px; }
+    }
+        section.active { opacity: 1; transform: translateY(0); }
+
+   
+  </style>
+</head>
+<body>
+
+<header class="main-header">
+  <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+
+  <nav id="mobileMenu">
+    <a href="#hero">الرئيسية</a>
+    <a href="#about">من نحن</a>
+    <a href="#features">المميزات</a>
+    <a href="#tour">صور التطبيق</a>
+    <a href="#why">ليش توق؟</a>
+    <a href="#contact">تواصل معنا</a>
+  </nav>
+
+  <div class="logo">
+    <img src="img/tog2.gif" alt="Tog Logo">
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <h1>مرحبًا بك في توق</h1>
+  <p>تجربة تسوق بسيطة، هادئة، وآمنة</p>
+  <div class="phone-mockup"></div>
+</section>
+
+<section id="download">
+  <h2>حمّل التطبيق الآن</h2>
+  <a href="apk/app-release.apk" class="download-btn">تحميل APK</a>
+</section>
+
+<section id="about">
+  <h2>من نحن</h2>
+  <div class="about-box">
+    <p>
+      توق هو تطبيق موبايل تم تطويره كمشروع تخرج، يهدف إلى تسهيل عملية عرض وبيع المنتجات
+      من خلال تجربة رقمية بسيطة وآمنة، مع التركيز على راحة المستخدم.
+    </p>
+  </div>
+</section>
+
+<section id="features">
+  <h2>مميزات التطبيق</h2>
+  <div class="features-container">
+    <div class="feature-card">
+      <h3>واجهة سهلة الاستخدام</h3>
+      <p>تصفح التطبيق بسهولة وسلاسة، بدون تعقيدات.</p>
+    </div>
+    <div class="feature-card">
+      <h3>أمان وخصوصية</h3>
+      <p>حماية بياناتك الشخصية وضمان الخصوصية العالية.</p>
+    </div>
+    <div class="feature-card">
+      <h3>تجربة سلسة</h3>
+      <p>سرعة التنقل بين الأقسام وعرض المنتجات بطريقة مرنة.</p>
+    </div>
+    <div class="feature-card">
+      <h3>عرض مبتكر للمنتجات</h3>
+      <p>طريقة جذابة لعرض منتجاتك المفضلة لجذب المستخدم.</p>
+    </div>
+    <div class="feature-card">
+      <h3>دعم كامل للأجهزة</h3>
+      <p>يتوافق التطبيق مع جميع الهواتف والأجهزة المحمولة.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tour">
+  <h2>جولة في التطبيق</h2>
+  <div class="tour-images">
+    <img src="img/2.png">
+    <img src="img/4.png">
+    <img src="img/7.png">
+    <img src="img/6.png">
+   <img src="img/3.png">
+
+    <img src="img/5.png">
+
+     <img src="img/8.png">
+     <img src="img/9.png">  
+      <img src="img/10.png">
+      
+
+  </div>
+</section>
+<section id="forwho">
+  <h2>لمن التطبيق مناسب؟</h2>
+
+  <p>
+    توق مصمم لكل شخص يبي تجربة تسوق بسيطة وسلسة من الموبايل
+  </p>
+
+  <div class="features-container">
+    <div class="feature-card">
+      <h3>للمستخدم العادي</h3>
+      <p>اللي يبي يتصفح ويشتري بسهولة وبدون تعقيد.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>للباحث عن البساطة</h3>
+      <p>واجهة واضحة وتجربة استخدام مريحة.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>لمحبي التنظيم</h3>
+      <p>منتجات مصنفة، مفضلة، وسلة مرتبة.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>لأي شخص يبي السرعة</h3>
+      <p>تنقل سريع وتجربة خفيفة بدون تعقيد.</p>
+    </div>
+  </div>
+</section>
+<section id="stats" class="py-5 text-center">
+  <div class="container">
+
+    <h2 class="fw-bold mb-2">أرقام من تجربة توق</h2>
+    <p class="text-muted mb-5">
+      إحصائيات تقديرية لأغراض العرض فقط
+    </p>
+
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <i class="bi bi-box-seam"></i>
+          <h3>+50</h3>
+          <p>منتج معروض</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <i class="bi bi-emoji-smile"></i>
+          <h3>95%</h3>
+          <p>سهولة استخدام</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <i class="bi bi-download"></i>
+          <h3>+500</h3>
+          <p>تحميل متوقع</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <i class="bi bi-star-fill"></i>
+          <h3>4.8</h3>
+          <p>تقييم المستخدمين</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="small text-muted mt-4">
+      * هذه الأرقام افتراضية ومخصصة لأغراض العرض الأكاديمي فقط
+    </p>
+
+  </div>
+</section>
+
+
+</section>
+
+
+<section id="why">
+  <h2>ليش تختاري توق؟</h2>
+
+  <p>
+    لأننا صممنا توق ليكون أقرب لك، أبسط في الاستخدام، وأريح في تجربة التسوق
+  </p>
+
+  <div class="features-container">
+    <div class="feature-card">
+      <h3>تجربة مريحة</h3>
+      <p>واجهة هادئة وتصميم بسيط يخليك تتسوقي بدون تعب.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>كل شي واضح</h3>
+      <p>تصنيفات مرتبة ومنتجات معروضة بطريقة سهلة.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>تحكّم كامل</h3>
+      <p>مفضلة، سلة، وتنقل سريع بين الصفحات.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>مصمم بعناية</h3>
+      <p>كل تفصيلة في توق معمولة باش تخدم المستخدم.</p>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- روابط سريعة -->
+    <div class="footer-col">
+      <h3> محتوى الموقع</h3>
+      <a href="#hero">الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#features">المميزات</a>
+      <a href="#tour">صور التطبيق</a>
+    </div>
+
+    <!-- تابعنا -->
+    <div class="footer-col">
+      <h3>تابعنا</h3>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/togcenterofficial" target="_blank">
+          <img src="img/000.png" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/share/1DJfX7G1vo" target="_blank">
+          <img src="img/تصميم بدون عنوان.png" alt="Facebook">
+        </a>
+      </div>
+    </div>
+     <div class="footer-col">
+      <h3>تواصل معنا</h3>
+      <div class="footer-social">
+       <a href="mailto:nusibaelgrew@gmail.com" target="_blank">Nusiba Elgrew</a>
+  <br> 
+  <a href="mailto:retaeh90@gmail.com" target="_blank">Retaj Almabrok</a>
+      </div>
+    </div>
+
+  </div>
+<hr , style="color: gray;">
+<br>
+  <p class="footer-copy">
+   
+    هذا التطبيق تم تطويره كمشروع تخرج لأغراض تعليمية وأكاديمية فقط.<br>
+    
+    جميع الحقوق محفوظة © 2026
+
+
+  </p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("show");
+  }
+
+  // يغلق المنيو بعد الضغط على أي رابط
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById("mobileMenu").classList.remove("show");
+    });
+  });
+
+  // reveal sections on scroll
+  const sections = document.querySelectorAll('section');
+  const revealOnScroll = () => {
+    const triggerBottom = window.innerHeight / 1.2;
+    sections.forEach(section => {
+      if (section.getBoundingClientRect().top < triggerBottom) {
+        section.classList.add('active');
+      }
+    });
+  };
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>
