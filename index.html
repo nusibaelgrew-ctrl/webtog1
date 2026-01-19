@@ -8,6 +8,9 @@
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Bootstrap JS + Popper -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
@@ -106,15 +109,12 @@
       color: #e6d8c9 !important;
     }
 
-    #stats {
-  background: linear-gradient(135deg, #514031, #3C2F25);
-}
 
 .stat-card {
-  background: #3a2b1e;
+  background: rgb(69, 53, 39);
   border-radius: 16px;
   padding: 30px 20px;
-  box-shadow: 0 10px 25px rgba(230, 230, 230, 0.484);
+  box-shadow: 0 10px 25px rgba(74, 59, 59, 0.484);
   transition: all 0.3s ease;
 }
 
@@ -184,25 +184,8 @@
     /* ===== DOWNLOAD ===== */
     .download-btn { background: #271C17; padding: 12px 25px; border-radius: 10px; font-weight: 600; }
 
-    /* ===== TOUR ===== */
-    .tour-images {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-    }
-    .tour-images img {
-      flex: 0 0 auto;
-      width: 200px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: grab;
-      scroll-snap-align: start;
-    }
-    .tour-images img:hover { transform: scale(1.15); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+  
+   
 
     /* ===== SOCIAL ICONS ===== */
     .social-icons { display: flex; gap: 15px; margin-top: 10px; }
@@ -338,7 +321,7 @@
     <a href="#about">من نحن</a>
     <a href="#features">المميزات</a>
     <a href="#tour">صور التطبيق</a>
-    <a href="#why">ليش توق؟</a>
+    <a href="#why">لماذا توق؟</a>
     <a href="#contact">تواصل معنا</a>
   </nav>
 
@@ -396,22 +379,48 @@
 
 <section id="tour">
   <h2>جولة في التطبيق</h2>
-  <div class="tour-images">
-    <img src="img/2.png">
-    <img src="img/4.png">
-    <img src="img/7.png">
-    <img src="img/6.png">
-   <img src="img/3.png">
-
-    <img src="img/5.png">
-
-     <img src="img/8.png">
-     <img src="img/9.png">  
-      <img src="img/10.png">
-      
-
+  <div id="appCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/2.png" class="d-block w-100" alt="App Screenshot 1">
+      </div>
+      <div class="carousel-item">
+        <img src="img/4.png" class="d-block w-100" alt="App Screenshot 2">
+      </div>
+      <div class="carousel-item">
+        <img src="img/7.png" class="d-block w-100" alt="App Screenshot 3">
+      </div>
+      <div class="carousel-item">
+        <img src="img/6.png" class="d-block w-100" alt="App Screenshot 4">
+      </div>
+      <div class="carousel-item">
+        <img src="img/3.png" class="d-block w-100" alt="App Screenshot 5">
+      </div>
+      <div class="carousel-item">
+        <img src="img/5.png" class="d-block w-100" alt="App Screenshot 6">
+      </div>
+      <div class="carousel-item">
+        <img src="img/8.png" class="d-block w-100" alt="App Screenshot 7">
+      </div>
+      <div class="carousel-item">
+        <img src="img/9.png" class="d-block w-100" alt="App Screenshot 8">
+      </div>
+      <div class="carousel-item">
+        <img src="img/10.png" class="d-block w-100" alt="App Screenshot 9">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#appCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">السابق</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#appCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">التالي</span>
+    </button>
   </div>
 </section>
+
+
 <section id="forwho">
   <h2>لمن التطبيق مناسب؟</h2>
 
@@ -446,7 +455,7 @@
 
     <h2 class="fw-bold mb-2">أرقام من تجربة توق</h2>
     <p class="text-muted mb-5">
-      إحصائيات تقديرية لأغراض العرض فقط
+ إحصائيات تقديرية 
     </p>
 
     <div class="row g-4 justify-content-center">
@@ -486,7 +495,7 @@
     </div>
 
     <p class="small text-muted mt-4">
-      * هذه الأرقام افتراضية ومخصصة لأغراض العرض الأكاديمي فقط
+      .. هذه الأرقام افتراضية
     </p>
 
   </div>
@@ -495,33 +504,32 @@
 
 </section>
 
-
 <section id="why">
-  <h2>ليش تختاري توق؟</h2>
+  <h2>لماذا توق؟</h2>
 
   <p>
-    لأننا صممنا توق ليكون أقرب لك، أبسط في الاستخدام، وأريح في تجربة التسوق
+    لأن توق صُمم خصيصًا ليكون الأقرب لك، سهل الاستخدام، ويقدّم تجربة تسوّق مريحة وممتعة.
   </p>
 
   <div class="features-container">
     <div class="feature-card">
-      <h3>تجربة مريحة</h3>
-      <p>واجهة هادئة وتصميم بسيط يخليك تتسوقي بدون تعب.</p>
+      <h3>تجربة سلسة</h3>
+      <p>واجهة هادئة وتصميم بسيط يُتيح لك التسوّق بكل راحة وبدون عناء.</p>
     </div>
 
     <div class="feature-card">
-      <h3>كل شي واضح</h3>
-      <p>تصنيفات مرتبة ومنتجات معروضة بطريقة سهلة.</p>
+      <h3>وضوح كامل</h3>
+      <p>تصنيفات منظمة ومنتجات معروضة بطريقة واضحة وسهلة الفهم.</p>
     </div>
 
     <div class="feature-card">
       <h3>تحكّم كامل</h3>
-      <p>مفضلة، سلة، وتنقل سريع بين الصفحات.</p>
+      <p>إمكانية إضافة المنتجات للمفضلة، متابعة السلة، والتنقل بين الصفحات بسرعة وسهولة.</p>
     </div>
 
     <div class="feature-card">
-      <h3>مصمم بعناية</h3>
-      <p>كل تفصيلة في توق معمولة باش تخدم المستخدم.</p>
+      <h3>تصميم مدروس</h3>
+      <p>كل تفصيلة في توق صُممت بعناية لتسهيل تجربة المستخدم وتقديم أفضل خدمة.</p>
     </div>
   </div>
 </section>
